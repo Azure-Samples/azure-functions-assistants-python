@@ -1,0 +1,31 @@
+#@host=https://<functionapp>.azurewebsites.net
+
+# To call in Azure you will need to set the key in the header
+# key can be obtained by running: az functionapp keys list --name <FunctionAppName> --resource-group <ResourceGroupName> --query "masterKey"
+# and setting the key in the header as follows:
+# x-functions-key: <key>
+# Warning: if key is set in this file, do not save and commit the file.  
+# instead save this file to a secure location and use it as needed
+
+@host=http://localhost:7071
+
+### Create a new chat
+PUT {{host}}/api/assistants/1
+
+
+### Ask what time it is in a place to trigger GetTime function
+POST  {{host}}/api/assistants/1
+Content-Type: application/json
+
+{
+    "message": "What is the current time in Tacoma?"
+}
+
+
+### Ask what the weather is in a place to trigger GetWeather function
+POST  {{host}}/api/assistants/1
+Content-Type: application/json
+
+{
+    "message": "What is the weather in Tacoma?"
+}
